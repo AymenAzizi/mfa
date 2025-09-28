@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MFA Setup Wizard Form View -->
+    <record id="view_mfa_setup_wizard_form" model="ir.ui.view">
+        <field name="name">mfa.setup.wizard.form</field>
+        <field name="model">mfa.setup.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Setup Multi-Factor Authentication">
+                <field name="step" invisible="1"/>
+                <field name="user_id" invisible="1"/>
+                
+                <!-- Setup Step -->
+                <div invisible="step != 'setup'">
+                    <div class="alert alert-info" role="alert">
+                        <strong>Setting up Multi-Factor Authentication</strong><br/>
+                        Please wait while we generate your QR code...
+                    </div>
+                </div>
+                
+                <!-- Verify Step -->
+                <div invisible="step != 'verify'">
+                    <div class="alert alert-info" role="alert">
+                        <strong>Step 1:</strong> Scan the QR code with your authenticator app (Google Authenticator, Authy, etc.)
+                    </div>
+                    
+                    <group>
+                        <field name="qr_code" widget="image" class="oe_avatar"/>
+                    </group>
+                    
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Step 2:</strong> Enter the 6-digit code from your authenticator app to verify the setup
+                    </div>
+                    
+                    <group>
+                        <field name="verification_code" placeholder="000000" maxlength="6"/>
+                    </group>
+                    
+                    <footer>
+                        <button string="Verify and Enable MFA" type="object" name="action_verify_and_enable" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </div>
+                
+                <!-- Complete Step -->
+                <div invisible="step != 'complete'">
+                    <div class="alert alert-success" role="alert">
+                        <strong>Multi-Factor Authentication Enabled!</strong><br/>
+                        Your account is now protected with an additional security layer.
+                    </div>
+                    
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Important:</strong> Save these backup codes in a secure location. 
+                        You can use them to access your account if you lose your authenticator device.
+                    </div>
+                    
+                    <group>
+                        <field name="backup_codes" widget="text" readonly="1"/>
+                    </group>
+                    
+                    <footer>
+                        <button string="Regenerate Backup Codes" type="object" name="action_regenerate_backup_codes" class="btn-secondary"/>
+                        <button string="Close" class="btn-primary" special="cancel"/>
+                    </footer>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- MFA Disable Wizard Form View -->
+    <record id="view_mfa_disable_wizard_form" model="ir.ui.view">
+        <field name="name">mfa.disable.wizard.form</field>
+        <field name="model">mfa.disable.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Disable Multi-Factor Authentication">
+                <field name="user_id" invisible="1"/>
+                
+                <div class="alert alert-warning" role="alert">
+                    <strong>Warning:</strong> Disabling Multi-Factor Authentication will reduce your account security.
+                    Are you sure you want to continue?
+                </div>
+                
+                <group>
+                    <field name="password" password="True" placeholder="Enter your password"/>
+                    <field name="confirmation"/>
+                </group>
+                
+                <footer>
+                    <button string="Disable MFA" type="object" name="action_disable_mfa" class="btn-danger"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

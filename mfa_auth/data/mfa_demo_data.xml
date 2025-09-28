@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo data for MFA module -->
+    <data noupdate="1">
+        <!-- Add admin user to MFA required group for demo -->
+        <record id="demo_admin_mfa_group" model="res.groups">
+            <field name="name">Demo MFA Required Users</field>
+            <field name="comment">Demo group to show MFA functionality</field>
+            <field name="category_id" ref="base.module_category_administration"/>
+        </record>
+    </data>
+</odoo>
