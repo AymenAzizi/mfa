@@ -35,7 +35,6 @@
         'security/mfa_security.xml',
         'views/mfa_settings.xml',
         'views/mfa_templates.xml',
-        'data/mfa_demo_data.xml',
     ],
     'installable': True,
     'auto_install': False,
