@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- User Form View Extension -->
+    <record id="view_users_form_mfa" model="ir.ui.view">
+        <field name="name">res.users.form.mfa</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Multi-Factor Authentication" name="mfa_config">
+                    <!-- Hidden fields for form access -->
+                    <field name="totp_secret" invisible="1"/>
+                    <field name="totp_backup_codes" invisible="1"/>
+                    <field name="mfa_failed_attempts" invisible="1"/>
+                    <field name="mfa_locked_until" invisible="1"/>
+                    
+                    <group>
+                        <group>
+                            <field name="mfa_enabled"/>
+                            <field name="force_mfa" readonly="1"/>
+                        </group>
+                        <group invisible="not mfa_enabled">
+                            <label for="mfa_failed_attempts" string="Failed Attempts"/>
+                            <div>
+                                <field name="mfa_failed_attempts" readonly="1" class="oe_inline"/>
+                                <field name="mfa_locked_until" readonly="1" invisible="not mfa_locked_until" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+                    
+                    <group invisible="mfa_enabled">
+                        <div class="alert alert-info" role="alert">
+                            <strong>Multi-Factor Authentication is not enabled.</strong><br/>
+                            Enable MFA to add an extra layer of security to your account.
+                        </div>
+                        <button string="Setup MFA" type="object" name="action_setup_mfa" class="btn-primary"/>
+                    </group>
+                    
+                    <group invisible="not mfa_enabled">
+                        <div class="alert alert-success" role="alert">
+                            <strong>Multi-Factor Authentication is enabled.</strong><br/>
+                            Your account is protected with an additional security layer.
+                        </div>
+                        <button string="Regenerate Backup Codes" type="object" name="action_setup_mfa" class="btn-secondary"/>
+                        <button string="Disable MFA" type="object" name="action_disable_mfa" class="btn-warning"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- MFA Log Tree View -->
+    <record id="view_mfa_log_tree" model="ir.ui.view">
+        <field name="name">mfa.log.tree</field>
+        <field name="model">mfa.log</field>
+        <field name="arch" type="xml">
+            <tree string="MFA Audit Logs" default_order="create_date desc">
+                <field name="create_date"/>
+                <field name="user_id"/>
+                <field name="action"/>
+                <field name="description"/>
+                <field name="ip_address"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- MFA Log Form View -->
+    <record id="view_mfa_log_form" model="ir.ui.view">
+        <field name="name">mfa.log.form</field>
+        <field name="model">mfa.log</field>
+        <field name="arch" type="xml">
+            <form string="MFA Audit Log" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="action"/>
+                            <field name="create_date"/>
+                        </group>
+                        <group>
+                            <field name="ip_address"/>
+                            <field name="user_agent"/>
+                        </group>
+                    </group>
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- MFA Log Action -->
+    <record id="action_mfa_log" model="ir.actions.act_window">
+        <field name="name">MFA Audit Logs</field>
+        <field name="res_model">mfa.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No MFA logs found!
+            </p>
+            <p>
+                This view shows audit logs for Multi-Factor Authentication activities.
+            </p>
+        </field>
+    </record>
+    
+    <!-- Menu Items -->
+    <menuitem id="menu_mfa_root" 
+              name="MFA Security" 
+              parent="base.menu_administration" 
+              sequence="50"/>
+    
+    <menuitem id="menu_mfa_logs" 
+              name="MFA Audit Logs" 
+              parent="menu_mfa_root" 
+              action="action_mfa_log" 
+              groups="mfa_auth.group_mfa_admin"
+              sequence="10"/>
+</odoo>

@@ -1,0 +1,80 @@
+/* MFA Module Styles */
+
+.mfa-qr-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.mfa-qr-code {
+    max-width: 200px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.mfa-backup-codes {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: monospace;
+    white-space: pre-line;
+}
+
+.mfa-alert {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.mfa-alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.mfa-alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.mfa-alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.mfa-form-group {
+    margin-bottom: 15px;
+}
+
+.mfa-form-control {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.mfa-verification-input {
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: monospace;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .mfa-qr-code {
+        max-width: 150px;
+    }
+    
+    .mfa-verification-input {
+        font-size: 16px;
+    }
+}

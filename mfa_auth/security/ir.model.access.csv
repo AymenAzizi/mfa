@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mfa_log_user,mfa.log.user,model_mfa_log,base.group_user,1,0,1,0
+access_mfa_log_admin,mfa.log.admin,model_mfa_log,mfa_auth.group_mfa_admin,1,1,1,1
+access_mfa_setup_wizard_user,mfa.setup.wizard.user,model_mfa_setup_wizard,base.group_user,1,1,1,1
+access_mfa_disable_wizard_user,mfa.disable.wizard.user,model_mfa_disable_wizard,base.group_user,1,1,1,1
