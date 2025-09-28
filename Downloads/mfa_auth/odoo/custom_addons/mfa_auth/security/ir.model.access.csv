@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mfa_log_user,mfa.log.user,model_mfa_log,base.group_user,1,0,0,0
+access_mfa_log_manager,mfa.log.manager,model_mfa_log,base.group_system,1,1,1,1
+access_mfa_wizard_user,mfa.wizard.user,model_mfa_setup_wizard,base.group_user,1,1,1,1
+access_mfa_wizard_manager,mfa.wizard.manager,model_mfa_setup_wizard,base.group_system,1,1,1,1
+access_res_users_mfa,res.users.mfa,base.model_res_users,base.group_user,1,1,0,0
+access_res_users_mfa_admin,res.users.mfa.admin,base.model_res_users,base.group_system,1,1,1,1

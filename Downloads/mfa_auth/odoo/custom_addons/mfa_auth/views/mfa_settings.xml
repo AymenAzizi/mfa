@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- User Form View -->
+    <record id="view_users_form_mfa" model="ir.ui.view">
+        <field name="name">res.users.form.mfa</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']" position="before">
+                <page string="Multi-Factor Authentication" name="mfa">
+                    <group>
+                        <group name="mfa_config">
+                            <field name="mfa_enabled"/>
+                            <field name="totp_secret" invisible="1"/>
+                            <field name="totp_backup_codes" invisible="1"/>
+                            <div class="alert alert-info" invisible="not mfa_enabled">
+                                <strong>Note:</strong> TOTP (Google Authenticator) is implemented.
+                            </div>
+                        </group>
+                        <group name="mfa_status">
+                            <field name="last_mfa_success" readonly="1"/>
+                            <field name="mfa_attempts" readonly="1"/>
+                            <field name="mfa_locked_until" readonly="1"
+                                   invisible="not mfa_locked_until"/>
+                        </group>
+                    </group>
+                    <group string="Actions" invisible="not mfa_enabled">
+                        <button name="action_setup_mfa" string="Setup MFA" type="object"
+                                class="btn-primary" invisible="totp_secret"/>
+                        <button name="action_disable_mfa" string="Disable MFA" type="object"
+                                class="btn-warning" confirm="Are you sure you want to disable MFA for this user?"/>
+                        <button name="action_reset_mfa_attempts" string="Reset Failed Attempts" type="object"
+                                class="btn-info" invisible="mfa_attempts == 0"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MFA Log Tree View -->
+    <record id="view_mfa_log_tree" model="ir.ui.view">
+        <field name="name">mfa.log.tree</field>
+        <field name="model">mfa.log</field>
+        <field name="arch" type="xml">
+            <tree string="MFA Logs">
+                <field name="user_id"/>
+                <field name="action"/>
+                <field name="ip_address"/>
+                <field name="success"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- MFA Log Form View -->
+    <record id="view_mfa_log_form" model="ir.ui.view">
+        <field name="name">mfa.log.form</field>
+        <field name="model">mfa.log</field>
+        <field name="arch" type="xml">
+            <form string="MFA Log">
+                <group>
+                    <field name="user_id"/>
+                    <field name="action"/>
+                    <field name="ip_address"/>
+                    <field name="success"/>
+                    <field name="create_date"/>
+                    <field name="notes"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- MFA Log Action -->
+    <record id="action_mfa_log" model="ir.actions.act_window">
+        <field name="name">MFA Logs</field>
+        <field name="res_model">mfa.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No MFA logs found
+            </p>
+            <p>
+                MFA logs will appear here when users interact with the MFA system.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_mfa_root" name="MFA System" sequence="100"/>
+    <menuitem id="menu_mfa_logs" name="MFA Logs" parent="menu_mfa_root" action="action_mfa_log" sequence="10"/>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Security Groups -->
+    <record id="group_mfa_user" model="res.groups">
+        <field name="name">MFA User</field>
+        <field name="category_id" ref="base.module_category_administration"/>
+        <field name="comment">Users who can use MFA features</field>
+    </record>
+
+    <record id="group_mfa_manager" model="res.groups">
+        <field name="name">MFA Manager</field>
+        <field name="category_id" ref="base.module_category_administration"/>
+        <field name="implied_ids" eval="[(4, ref('group_mfa_user'))]"/>
+        <field name="comment">Users who can manage MFA settings and view logs</field>
+    </record>
+</odoo>

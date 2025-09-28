@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MFA Verification Template -->
+    <template id="mfa_verify_template" name="MFA Verification">
+        <t t-call="web.layout">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fa fa-shield"></i> Multi-Factor Authentication</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <strong>Security Verification Required</strong><br/>
+                                    Please enter the verification code from your authenticator app.
+                                </div>
+                                
+                                <t t-if="error" class="alert alert-danger">
+                                    <t t-esc="error"/>
+                                </t>
+                                
+                                <form method="post" action="/web/mfa/verify">
+                                    <div class="form-group">
+                                        <label for="code">Verification Code:</label>
+                                        <input type="text" name="code" class="form-control" 
+                                               placeholder="Enter 6-digit code" maxlength="6" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            Verify Code
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <div class="text-center">
+                                    <small class="text-muted">
+                                        Don't have your authenticator app? Contact your administrator.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- MFA Setup Success Template -->
+    <template id="mfa_setup_success_template" name="MFA Setup Success">
+        <t t-call="web.layout">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h4><i class="fa fa-check-circle"></i> MFA Setup Complete</h4>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="alert alert-success">
+                                    <h5>Multi-Factor Authentication Enabled</h5>
+                                    <p>Your account is now protected with MFA</p>
+                                </div>
+                                
+                                <div class="alert alert-info">
+                                    <h6>Important Security Information:</h6>
+                                    <ul class="text-left">
+                                        <li>You'll need to enter a verification code each time you log in</li>
+                                        <li>Keep your authenticator app secure</li>
+                                        <li>Save your backup codes in a safe place</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <a href="/web" class="btn btn-success btn-lg">Continue to Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
