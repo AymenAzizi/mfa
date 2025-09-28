@@ -1,0 +1,110 @@
+/* MFA Authentication Styles */
+
+.mfa-verification-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.mfa-qr-code {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.mfa-qr-code img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    background: white;
+}
+
+.mfa-backup-codes {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-line;
+}
+
+.mfa-verification-code {
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.mfa-help {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e7f3ff;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+}
+
+.mfa-error {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.mfa-success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.mfa-warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+/* Form styling */
+.mfa-form-group {
+    margin-bottom: 20px;
+}
+
+.mfa-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.mfa-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.mfa-button-group {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.mfa-button-group button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.mfa-button-primary {
+    background: #007bff;
+    color: white;
+}
+
+.mfa-button-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.mfa-button-primary:hover {
+    background: #0056b3;
+}
+
+.mfa-button-secondary:hover {
+    background: #545b62;
+}

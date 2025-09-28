@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mfa_verify_template" name="MFA Verification">
+        <t t-call="web.layout">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Multi-Factor Authentication</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Please enter the verification code from your authenticator app:</p>
+                                <form method="post" action="/web/mfa/verify/submit">
+                                    <div class="form-group">
+                                        <label for="token">Verification Code</label>
+                                        <input type="text" 
+                                               name="token" 
+                                               id="token"
+                                               class="form-control" 
+                                               placeholder="Enter 6-digit code" 
+                                               maxlength="6" 
+                                               pattern="[0-9]{6}"
+                                               autocomplete="off"/>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="backup_code">Or use a backup code</label>
+                                        <input type="text" 
+                                               name="backup_code" 
+                                               id="backup_code"
+                                               class="form-control" 
+                                               placeholder="Enter backup code" 
+                                               autocomplete="off"/>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Verify</button>
+                                        <a href="/web/mfa/cancel" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </form>
+                                
+                                <t t-if="error">
+                                    <div class="alert alert-danger" t-esc="error"/>
+                                </t>
+                                
+                                <div class="alert alert-info">
+                                    <h5>Need help?</h5>
+                                    <ul>
+                                        <li>Make sure your device's time is synchronized</li>
+                                        <li>Use the backup codes if you can't access your authenticator app</li>
+                                        <li>Contact your administrator if you're locked out</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

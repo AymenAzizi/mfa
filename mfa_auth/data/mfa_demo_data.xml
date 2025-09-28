@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo user with MFA enabled -->
+        <record id="demo_user_mfa" model="res.users">
+            <field name="name">Demo MFA User</field>
+            <field name="login">demo.mfa@example.com</field>
+            <field name="email">demo.mfa@example.com</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="mfa_enabled">True</field>
+            <field name="totp_secret">JBSWY3DPEHPK3PXP</field>
+            <field name="totp_backup_codes">A1B2C3D4E5F6
+G7H8I9J0K1L2
+M3N4O5P6Q7R8
+S9T0U1V2W3X4
+Y5Z6A7B8C9D0
+E1F2G3H4I5J6
+K7L8M9N0O1P2
+Q3R4S5T6U7V8
+W9X0Y1Z2A3B4
+C5D6E7F8G9H0</field>
+        </record>
+        
+        <!-- Demo MFA log entries -->
+        <record id="demo_mfa_log_1" model="mfa.log">
+            <field name="user_id" ref="demo_user_mfa"/>
+            <field name="action">setup</field>
+            <field name="description">MFA enabled for demo user</field>
+            <field name="ip_address">127.0.0.1</field>
+            <field name="user_agent">Demo Browser</field>
+        </record>
+        
+        <record id="demo_mfa_log_2" model="mfa.log">
+            <field name="user_id" ref="demo_user_mfa"/>
+            <field name="action">success</field>
+            <field name="description">Successful MFA login</field>
+            <field name="ip_address">127.0.0.1</field>
+            <field name="user_agent">Demo Browser</field>
+        </record>
+    </data>
+</odoo>
